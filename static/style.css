@@ -1,0 +1,47 @@
+header {
+    grid-area: header;
+}
+
+nav {
+    grid-area: nav;
+}
+
+ul {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    list-style: none;
+}
+
+#welcome {
+    grid-area: welcome;
+    text-align: center;
+}
+
+body {
+    display: grid;
+    grid-template-areas: 
+        'header header nav'
+        'welcome welcome welcome'
+        'main-nav main-nav main-nav';
+}
+
+#main-nav {
+    display: flex;
+    flex-flow: column;
+    grid-area: main-nav;
+}
+
+
+#bigbuttons > ul {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly; 
+}
+
+#smallerbuttons > ul {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+}
+

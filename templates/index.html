@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h1 id="welcome">Welcome!</h1>
+<section id="main-nav">
+<div id = "bigbuttons">
+    <ul>
+        <li><a href="/members/new"><h2>New Member</h2></a></li>
+        <li><a href="/sessions/new"><h2>New Session</h2></a></li>
+    </ul>
+</div>
+<br>
+<div id = "smallerbuttons">
+    <ul>
+        <li><a href="/members"><h3>View all Members</h2></a></li>
+        <li><a href="/sessions"><h3>View all Sessions</h2></a></li>
+        <li><a href="/bookings"><h3>View all Bookings</h2></a></li>
+    </ul>
+</div>
+</section>
 
 {% endblock %}
