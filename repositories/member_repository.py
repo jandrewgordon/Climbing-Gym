@@ -8,5 +8,16 @@ def save(member):
     member.id = results[0]['id']
     return member
 
+def select_all():
+    members = []
+
+    results = run_sql("SELECT * FROM members")
+    for row in results:
+        member = Member(row['last_name'], row['first_name'], row['premium'], row['bookings'], row['id'])
+        members.append(member)
+    return members
+
+   
+
 def delete_all():
     run_sql("DELETE FROM members")
