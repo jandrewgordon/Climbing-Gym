@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add New Session</h1>
+
+<form action="/sessions" method="post">
+    <label for="name">Session Name:</label>
+    <input type="text" name="name" id="name">
+    <label for="capacity">Capacity:</label>
+    <input type="text" name="capacity" id="capacity">
+    <label for="premium">Premium Session?</label>
+    <input type="checkbox" name="premium" id="premium" value="premium">
+
+    
+    <input type="submit">
+    
+
+</form>
+
+{% endblock %}

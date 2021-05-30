@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul>
+{% for session in all_sessions %}
+<li><a href="/session/{{session.id}}">{{session.name}}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

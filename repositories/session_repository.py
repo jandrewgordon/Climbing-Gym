@@ -8,5 +8,16 @@ def save(session):
     session.id = results[0]['id']
     return session
 
+def select_all():
+    sessions = []
+
+    results = run_sql("SELECT * FROM sessions")
+    for row in results:
+        session = Session(row['name'], row['capacity'], row['premium'], row['id'])
+        sessions.append(session)
+    return sessions
+
 def delete_all():
     run_sql("DELETE FROM sessions")
+
+    
