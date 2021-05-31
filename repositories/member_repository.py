@@ -8,6 +8,13 @@ def save(member):
     member.id = results[0]['id']
     return member
 
+def select(id):
+    sql = "SELECT * FROM members WHERE id = %s"
+    values = [id]
+    result = run_sql(sql, values)[0]
+    member = Member(result['last_name'], result['first_name'], result['premium'], result['bookings'], result['id'])
+    return member
+
 def select_all():
     members = []
 

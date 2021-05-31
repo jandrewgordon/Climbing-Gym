@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul>
+{% for booking in all_bookings %}
+    <li><a href="/bookings/{{booking.id}}">{{booking.member.first_name}}</a></li>
+{% endfor %}
+</ul>
+<p><a href="/bookings/new">Make new booking</a></p>
+
+{% endblock %}

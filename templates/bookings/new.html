@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add New Booking</h1>
+
+<form action="/bookings" method="post">
+    {% for member in members %}
+    <label for="member">Member:</label>
+        <select name="member_id" id="member">
+            <option value="{{member.id}}">{{member.last_name}}, {{member.first_name}}</option>
+        </select>
+    {% endfor %}
+    {% for session in sessions %}
+    <label for="session">Session:</label>
+    <select name="session_id" id="session">
+        <option value="{{session.id}}">{{session.name}}</option>
+    </select>
+    {% endfor %}
+    
+    <input type="submit">
+    
+
+</form>
+
+{% endblock %}

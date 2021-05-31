@@ -17,6 +17,13 @@ def select_all():
         sessions.append(session)
     return sessions
 
+def select(id):
+    sql = "SELECT * FROM sessions WHERE id = %s"
+    values = [id]
+    result = run_sql(sql, values)[0]
+    session = Session(result['name'], int(result['capacity']), result['premium'], result['id'])
+    return session
+
 def delete_all():
     run_sql("DELETE FROM sessions")
 

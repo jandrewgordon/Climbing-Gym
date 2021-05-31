@@ -1,5 +1,6 @@
-DROP TABLE members;
-DROP TABLE sessions;
+DROP TABLE IF EXISTS bookings;
+DROP TABLE IF EXISTS members;
+DROP TABLE IF EXISTS sessions;
 
 CREATE TABLE members (
     id SERIAL PRIMARY KEY,
@@ -14,4 +15,10 @@ CREATE TABLE sessions (
     name VARCHAR (255),
     capacity INT,
     premium BOOLEAN
+);
+
+CREATE TABLE bookings (
+    id SERIAL PRIMARY KEY,
+    member_id SERIAL REFERENCES members(id),
+    session_id SERIAL REFERENCES sessions(id),
 );

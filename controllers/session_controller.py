@@ -9,6 +9,11 @@ def sessions():
     sessions = session_repository.select_all()
     return render_template("sessions/index.html", all_sessions = sessions)
 
+@sessions_blueprint.route("/sessions/<id>")
+def show_session(id):
+    session = session_repository.select(id)
+    return render_template("sessions/show.html", session = session)
+
 @sessions_blueprint.route("/sessions/new", methods=['GET'])
 def get_new_session():
     return render_template("sessions/new.html")
