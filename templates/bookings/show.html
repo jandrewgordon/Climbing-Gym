@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{booking.date}}</h1>
+<h1>{{booking.booking_date}}</h1>
+<h2>Members in Session:</h2>
+<ul>
+{% for member in members %}
+    <li>{{member.last_name}}, {{member.first_name}}</li>
+</ul>
+{% endfor %}
+
 
 {% endblock %}

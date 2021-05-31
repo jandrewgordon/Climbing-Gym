@@ -1,6 +1,7 @@
 from datetime import date
 from flask import Flask, render_template, redirect, request, Blueprint
 from models.booking import Booking
+from models.member import Member
 import repositories.member_repository as member_repository
 import repositories.session_repository as session_repository
 import repositories.booking_repository as booking_repository
@@ -38,8 +39,19 @@ def create_new_booking():
 
 @bookings_blueprint.route("/bookings/<id>")
 def show_booking(id):
-    booking = booking_repository.select(id)
-    return render_template("sessions/show.html", all_bookings=booking)
+    booked_members = []
+    selected_booking = booking_repository.select(id)
+    bookings = booking_repository.select_all()
+    members = member_repository.select_all()
+    for single_booking in bookings:
+        if single_booking.session.id == selected_booking.session.id:
+            booked_member_id = single_booking.member.id
+            for member in members:
+                if member.id == booked_member_id:
+                    booked_member = member
+                    booked_members.append(booked_member)                  
+    
+    return render_template("bookings/show.html", booking = selected_booking, members = booked_members)
 
 # DELETE
 @bookings_blueprint.route("/bookings/<id>/delete", methods=["POST"])

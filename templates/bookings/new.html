@@ -4,18 +4,23 @@
 <h1>Add New Booking</h1>
 
 <form action="/bookings" method="post">
-    {% for member in members %}
+   
     <label for="member">Member:</label>
-        <select name="member_id" id="member">
-            <option value="{{member.id}}">{{member.last_name}}, {{member.first_name}}</option>
-        </select>
+    <select name="member_id" id="member">
+    {% for member in members %}    
+    <option value="{{member.id}}">{{member.last_name}}, {{member.first_name}}</option>
     {% endfor %}
-    {% for session in sessions %}
+    </select>
+    
     <label for="session">Session:</label>
     <select name="session_id" id="session">
-        <option value="{{session.id}}">{{session.name}}</option>
+    {% for session in sessions %}      
+    <option value="{{session.id}}">{{session.name}}</option>
+    {% endfor %}    
     </select>
-    {% endfor %}
+    
+    
+    
     <label for="booking_date">Date:</label>
     <input type="date" name="booking_date" id="booking_date">
     <input type="submit">
