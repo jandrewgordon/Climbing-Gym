@@ -1,6 +1,7 @@
+DROP TABLE IF EXISTS sessions;
 DROP TABLE IF EXISTS bookings;
 DROP TABLE IF EXISTS members;
-DROP TABLE IF EXISTS sessions;
+
 
 CREATE TABLE members (
     id SERIAL PRIMARY KEY,
@@ -19,6 +20,7 @@ CREATE TABLE sessions (
 
 CREATE TABLE bookings (
     id SERIAL PRIMARY KEY,
-    member_id SERIAL REFERENCES members(id),
-    session_id SERIAL REFERENCES sessions(id),
+    member_id INT REFERENCES members(id),
+    session_id INT REFERENCES sessions(id),
+    booking_date VARCHAR (255)
 );

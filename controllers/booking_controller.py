@@ -1,3 +1,4 @@
+from datetime import date
 from flask import Flask, render_template, redirect, request, Blueprint
 from models.booking import Booking
 import repositories.member_repository as member_repository
@@ -24,9 +25,11 @@ def get_new_booking():
 def create_new_booking():
     member_id = request.form['member_id']
     session_id = request.form['session_id']
+    booking_date = request.form['booking_date']
     member = member_repository.select(member_id)
     session = session_repository.select(session_id)
-    new_booking = Booking(member, session)
+    new_booking = Booking(member, session, booking_date)
+    print(booking_date)
     booking_repository.save(new_booking)
     return redirect("/bookings")
 
@@ -34,8 +37,9 @@ def create_new_booking():
 #UPDATE
 
 @bookings_blueprint.route("/bookings/<id>")
-def show_booking():
-    pass
+def show_booking(id):
+    booking = booking_repository.select(id)
+    return render_template("sessions/show.html", all_bookings=booking)
 
 # DELETE
 @bookings_blueprint.route("/bookings/<id>/delete", methods=["POST"])
