@@ -11,17 +11,26 @@
 # def save(upcoming_session):
 #     sql = "INSERT INTO upcoming_sessions (session_name, session_date) VALUES (%s, %s) RETURNING *"
 #     values = [upcoming_session.session_name, upcoming_session.session_date]
-
 #     existing_upcoming_sessions = run_sql("SELECT * FROM upcoming_sessions")
-#     if existing_upcoming_sessions != []:
+
+#     if existing_upcoming_sessions !=[]:
+
+#         upcoming_session_exists = False
+
 #         for row in existing_upcoming_sessions:
-#             if row['session_date'] != upcoming_session.session_date:
-#                 results = run_sql(sql, values)
-#                 id = results[0]['id']
-#                 upcoming_session.id = id
-#                 ("I added it anyway")
+
+#             if row['session_date'] == upcoming_session.session_date and row['session_name'] == upcoming_session.session_name:
+#                 upcoming_session_exists = True
 #             else:
-#                 print("Already Exists Mate!")           
+#                 upcoming_session_exists = False
+
+#         if upcoming_session_exists == False:
+#             results = run_sql(sql, values)
+#             id = results[0]['id']
+#             upcoming_session.id = id
+#         else:
+#             print("Upcoming Session already exists")
+
 #     else:
 #         results = run_sql(sql, values)
 #         id = results[0]['id']
@@ -37,28 +46,30 @@
 #         upcoming_sessions.append(upcoming_session)
 #     return upcoming_sessions  
 
-# # def select(id):
-# #     sql = "SELECT * FROM bookings WHERE id = %s"
-# #     values = [id]
-# #     result = run_sql(sql, values)[0]
-# #     member = member_repository.select(result['member_id'])
-# #     session = session_repository.select(result['session_id'])
-# #     booking_date = result['booking_date']
-# #     capacity = session.capacity
-# #     booking = Booking(member, session, booking_date, capacity, id)
-# #     return booking
+# NOT USING
 
-# # def delete_all():
-# #     run_sql("DELETE FROM bookings")
+# def select(id):
+#     sql = "SELECT * FROM bookings WHERE id = %s"
+#     values = [id]
+#     result = run_sql(sql, values)[0]
+#     member = member_repository.select(result['member_id'])
+#     session = session_repository.select(result['session_id'])
+#     booking_date = result['booking_date']
+#     capacity = session.capacity
+#     booking = Booking(member, session, booking_date, capacity, id)
+#     return booking
 
-# # def update_capacity(booking):
-# #     sql = "UPDATE bookings SET (member_id, session_id, booking_date, capacity) = (%s, %s, %s, %s) WHERE id = %s"
-# #     booking.capacity -= 1
-# #     values = [booking.member.id, booking.session.id, booking.booking_date, booking.capacity]
-# #     run_sql(sql, values)
+# def delete_all():
+#     run_sql("DELETE FROM bookings")
 
-# # def booked_member_list():
-# #     pass
+# def update_capacity(booking):
+#     sql = "UPDATE bookings SET (member_id, session_id, booking_date, capacity) = (%s, %s, %s, %s) WHERE id = %s"
+#     booking.capacity -= 1
+#     values = [booking.member.id, booking.session.id, booking.booking_date, booking.capacity]
+#     run_sql(sql, values)
+
+# def booked_member_list():
+#     pass
     
     
     

@@ -9,8 +9,8 @@ import repositories.session_repository as session_repository
 def save(booking):
     sql = "INSERT INTO bookings (member_id, session_id, booking_date, capacity) VALUES (%s, %s, %s, %s) RETURNING *"
     values = [booking.member.id, booking.session.id, booking.booking_date, booking.session.capacity]
-    
     existing_bookings = run_sql("SELECT * FROM bookings")
+    
     if existing_bookings != []:
         
         booking_exists = False
@@ -20,8 +20,10 @@ def save(booking):
             if row['booking_date'] == booking.booking_date:
                 booking_exists = True
                 print("Number 1")
+                break
             else:
                 booking_exists = False
+                print("Number 2")
 
         if booking_exists == False:
             results = run_sql(sql, values)
