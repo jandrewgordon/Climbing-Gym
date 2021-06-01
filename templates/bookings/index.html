@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h2>Current Bookings:</h2>
+{{response}}
 <ul>
 {% for booking in all_bookings %}
-    <li><a href="/bookings/{{booking.id}}">{{booking.id}}</a></li>
+    <li><a href="/bookings/{{booking.id}}">{{booking.booking_date}} - {{booking.session.name}} - {{booking.member.last_name}}, {{booking.member.first_name}} </a></li>
 {% endfor %}
 </ul>
 <p><a href="/bookings/new">Make new booking</a></p>
-
 {% endblock %}

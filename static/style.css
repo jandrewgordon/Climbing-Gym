@@ -23,39 +23,30 @@ header > nav >  ul {
     justify-content: space-evenly;
 }
 
+body {
+    margin: 0;
+}
+
+main {
+    /* padding-left: 20px; */
+}
 
 #welcome {
-    grid-area: welcome;
     text-align: center;
 }
 
-body {
-    margin: 0;
-    display: grid;
-    grid-template-areas: 
-        'header header header'
-        'welcome welcome welcome'
-        'main-nav main-nav main-nav';
-}
-
-#main-nav {
-    display: flex;
-    flex-flow: column;
-    grid-area: main-nav;
+.input {
+    
 }
 
 
-#bigbuttons > ul {
+.buttons {
     display: flex;
     flex-flow: row;
     justify-content: space-evenly; 
-    list-style: none;
 }
 
-#smallerbuttons > ul {
-    display: flex;
-    flex-flow: row;
-    justify-content: space-evenly;
-    list-style: none;
+main {
+    padding: 0px 20px;
 }
 

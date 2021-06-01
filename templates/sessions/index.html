@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h2>Current Sessions:</h2>
 <ul>
 {% for session in all_sessions %}
 <li><a href="/sessions/{{session.id}}">{{session.name}}</a></li>
 {% endfor %}
 </ul>
+<a href="sessions/new">Add New Session</a>
 
 {% endblock %}

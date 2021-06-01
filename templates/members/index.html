@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h2>Current Members:</h2>
 <ul>
 {% for member in all_members %}
 <li><a href="/members/{{member.id}}">{{member.last_name}}, {{member.first_name}}</a></li>
 {% endfor %}
 </ul>
+
+<a href="/members/new">Add New Member</a>
 
 {% endblock %}

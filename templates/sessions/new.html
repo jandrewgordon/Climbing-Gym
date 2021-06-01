@@ -3,18 +3,22 @@
 {% block content %}
 <h1>Add New Session</h1>
 
+<section class="input">
 <form action="/sessions" method="post">
     <label for="name">Session Name:</label>
     <input type="text" name="name" id="name">
+    <br><br>
     <label for="capacity">Capacity:</label>
     <input type="text" name="capacity" id="capacity">
+    <br><br>
     <label for="premium">Premium Session?</label>
     <input type="checkbox" name="premium" id="premium" value="premium">
-
+    <br><br>
     
     <input type="submit">
     
 
 </form>
+</section>
 
 {% endblock %}

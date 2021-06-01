@@ -3,29 +3,35 @@
 {% block content %}
 <h1>Add New Booking</h1>
 
+<section class="input"></section>
 <form action="/bookings" method="post">
    
     <label for="member">Member:</label>
     <select name="member_id" id="member">
     {% for member in members %}    
-    <option value="{{member.id}}">{{member.last_name}}, {{member.first_name}}</option>
+        <option value="{{member.id}}">{{member.last_name}}, {{member.first_name}}</option>
     {% endfor %}
     </select>
-    
+
+    <br><br>
+
     <label for="session">Session:</label>
     <select name="session_id" id="session">
     {% for session in sessions %}      
-    <option value="{{session.id}}">{{session.name}}</option>
+        <option value="{{session.id}}">{{session.name}}</option>
     {% endfor %}    
     </select>
-    
-    
-    
+
+    <br><br>
+
     <label for="booking_date">Date:</label>
     <input type="date" name="booking_date" id="booking_date">
+
+    <br><br>
+
     <input type="submit">
     
 
 </form>
-
+</section>
 {% endblock %}
