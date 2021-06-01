@@ -11,8 +11,35 @@ import repositories.booking_repository as booking_repository
 def save(upcoming_session):
     sql = "INSERT INTO upcoming_sessions(session_name, session_date) VALUES (%s, %s) RETURNING *"
     values = [upcoming_session.session_name, upcoming_session.session_date]
-    results = run_sql(sql, values)
-    upcoming_session.id = results[0]['id']
+    existing_upcoming_sessions = run_sql("SELECT * FROM upcoming_sessions")
+
+    if existing_upcoming_sessions != []:
+        upcoming_session_exists = False
+
+        for row in existing_upcoming_sessions:
+            
+            if row['session_name'] == upcoming_session.session_name and row['session_date'] == upcoming_session.session_date:
+                upcoming_session_exists = True
+                print("Upcoming Number 1")
+                break
+            else:
+                upcoming_session_exists = False
+
+        if upcoming_session_exists == False:
+            results = run_sql(sql, values)
+            id = results[0]['id']
+            upcoming_session.id = id
+            print("Upcoming Number 2")
+        else:
+            print("Upcoming Session Already Exists")
+    else:
+        results = run_sql(sql, values)
+        id = results[0]['id']
+        upcoming_session.id = id
+        print("Upcoming Number 3")
+
+        
+   
 
 # def select_all():
 #     upcoming_sessions = []
