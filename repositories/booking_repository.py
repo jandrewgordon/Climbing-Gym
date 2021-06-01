@@ -17,7 +17,7 @@ def save(booking):
 
         for row in existing_bookings:
             
-            if row['booking_date'] == booking.booking_date:
+            if row['booking_date'] == booking.booking_date and row['member_id'] == booking.member.id:
                 booking_exists = True
                 print("Number 1")
                 break
