@@ -1,42 +1,18 @@
-# from db.run_sql import run_sql
-# from models.member import Member
-# from models.session import Session
-# from models.booking import Booking
-# from models.upcoming_session import UpcomingSession
+from db.run_sql import run_sql
+from models.member import Member
+from models.session import Session
+from models.booking import Booking
+from models.upcoming_session import UpcomingSession
 
-# import repositories.member_repository as member_repository
-# import repositories.session_repository as session_repository
-# import repositories.booking_repository as booking_repository
+import repositories.member_repository as member_repository
+import repositories.session_repository as session_repository
+import repositories.booking_repository as booking_repository
 
-# def save(upcoming_session):
-#     sql = "INSERT INTO upcoming_sessions (session_name, session_date) VALUES (%s, %s) RETURNING *"
-#     values = [upcoming_session.session_name, upcoming_session.session_date]
-#     existing_upcoming_sessions = run_sql("SELECT * FROM upcoming_sessions")
-
-#     if existing_upcoming_sessions !=[]:
-
-#         upcoming_session_exists = False
-
-#         for row in existing_upcoming_sessions:
-
-#             if row['session_date'] == upcoming_session.session_date and row['session_name'] == upcoming_session.session_name:
-#                 upcoming_session_exists = True
-#             else:
-#                 upcoming_session_exists = False
-
-#         if upcoming_session_exists == False:
-#             results = run_sql(sql, values)
-#             id = results[0]['id']
-#             upcoming_session.id = id
-#         else:
-#             print("Upcoming Session already exists")
-
-#     else:
-#         results = run_sql(sql, values)
-#         id = results[0]['id']
-#         upcoming_session.id = id
-#         ("I added it OVER HERE anyway")
-        
+def save(upcoming_session):
+    sql = "INSERT INTO upcoming_sessions(session_name, session_date) VALUES (%s, %s) RETURNING *"
+    values = [upcoming_session.session_name, upcoming_session.session_date]
+    results = run_sql(sql, values)
+    upcoming_session.id = results[0]['id']
 
 # def select_all():
 #     upcoming_sessions = []

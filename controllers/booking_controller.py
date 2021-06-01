@@ -38,8 +38,8 @@ def create_new_booking():
     booking_repository.save(new_booking)
 
     # # Creating upcoming_session
-    # upcoming_session = UpcomingSession(session.name, booking_date)
-    # upcoming_session_repository.save(upcoming_session)
+    upcoming_session = UpcomingSession(session.name, booking_date)
+    upcoming_session_repository.save(upcoming_session)
 
     return redirect("/bookings")
 
