@@ -14,7 +14,8 @@ bookings_blueprint = Blueprint("bookings", __name__)
 @bookings_blueprint.route("/bookings")
 def bookings():
     bookings = booking_repository.select_all()
-    return render_template("bookings/index.html", all_bookings = bookings)
+    upcoming_sessions = upcoming_session_repository.select_all()
+    return render_template("bookings/index.html", all_bookings = bookings, all_upcoming_sessions = upcoming_sessions)
 
 # NEW
 @bookings_blueprint.route("/bookings/new", methods=['GET'])
@@ -38,7 +39,7 @@ def create_new_booking():
     booking_repository.save(new_booking)
 
     # # Creating upcoming_session
-    upcoming_session = UpcomingSession(session.name, booking_date)
+    upcoming_session = UpcomingSession(session.name, booking_date, session.capacity, member)
     upcoming_session_repository.save(upcoming_session)
 
     return redirect("/bookings")
@@ -52,14 +53,14 @@ def show_booking(id):
     selected_booking = booking_repository.select(id)
     bookings = booking_repository.select_all()
     members = member_repository.select_all()
-    for single_booking in bookings:
-        if single_booking.session.id == selected_booking.session.id:
-            booked_member_id = single_booking.member.id
-            for member in members:
-                if member.id == booked_member_id and selected_booking.session.capacity != 0:
-                    booked_member = member
-                    booked_members.append(booked_member)
-                    booking_repository.update_capacity(selected_booking)                 
+    # for single_booking in bookings:
+    #     if single_booking.session.id == selected_booking.session.id:
+    #         booked_member_id = single_booking.member.id
+    #         for member in members:
+    #             if member.id == booked_member_id and selected_booking.session.capacity != 0:
+    #                 booked_member = member
+    #                 booked_members.append(booked_member)
+    #                 booking_repository.update_capacity(selected_booking)                 
     
     return render_template("bookings/show.html", booking = selected_booking, booked_members = booked_members, all_members = members)
 

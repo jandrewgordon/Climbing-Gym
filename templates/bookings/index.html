@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h2>Upcoming Sessions:</h2>
+{{response}}
+<ul>
+{% for upcoming_session in all_upcoming_sessions %}
+    <li><a href="/upcoming_sessions/{{upcoming_session.id}}">{{upcoming_session.session_date}} - {{upcoming_session.session_name}}</a></li>
+{% endfor %}
+</ul>
 <h2>Current Bookings:</h2>
 {{response}}
 <ul>

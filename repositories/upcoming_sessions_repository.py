@@ -9,8 +9,8 @@ import repositories.session_repository as session_repository
 import repositories.booking_repository as booking_repository
 
 def save(upcoming_session):
-    sql = "INSERT INTO upcoming_sessions(session_name, session_date) VALUES (%s, %s) RETURNING *"
-    values = [upcoming_session.session_name, upcoming_session.session_date]
+    sql = "INSERT INTO upcoming_sessions(session_name, session_date, remaining_capacity, member_id) VALUES (%s, %s, %s, %s) RETURNING *"
+    values = [upcoming_session.session_name, upcoming_session.session_date, upcoming_session.remaining_capacity, upcoming_session.member.id]
     existing_upcoming_sessions = run_sql("SELECT * FROM upcoming_sessions")
 
     if existing_upcoming_sessions != []:
@@ -20,7 +20,6 @@ def save(upcoming_session):
             
             if row['session_name'] == upcoming_session.session_name and row['session_date'] == upcoming_session.session_date:
                 upcoming_session_exists = True
-                print("Upcoming Number 1")
                 break
             else:
                 upcoming_session_exists = False
@@ -29,38 +28,34 @@ def save(upcoming_session):
             results = run_sql(sql, values)
             id = results[0]['id']
             upcoming_session.id = id
-            print("Upcoming Number 2")
         else:
-            print("Upcoming Session Already Exists")
+            pass
     else:
         results = run_sql(sql, values)
         id = results[0]['id']
         upcoming_session.id = id
-        print("Upcoming Number 3")
+            
 
-        
-   
 
-# def select_all():
-#     upcoming_sessions = []
-#     results = run_sql("SELECT * FROM upcoming_sessions")
-#     for row in results:
-#         upcoming_session = UpcomingSession(row['session_name'], row['session_date'], row['id'])
-#         upcoming_sessions.append(upcoming_session)
-#     return upcoming_sessions  
+def select_all():
+    upcoming_sessions = []
+    results = run_sql("SELECT * FROM upcoming_sessions")
+    for row in results:
+        member = member_repository.select(row['member_id'])
+        upcoming_session = UpcomingSession(row['session_name'], row['session_date'], row['remaining_capacity'], member, row['id'])
+        upcoming_sessions.append(upcoming_session)
+    return upcoming_sessions  
 
-# NOT USING
-
-# def select(id):
-#     sql = "SELECT * FROM bookings WHERE id = %s"
-#     values = [id]
-#     result = run_sql(sql, values)[0]
-#     member = member_repository.select(result['member_id'])
-#     session = session_repository.select(result['session_id'])
-#     booking_date = result['booking_date']
-#     capacity = session.capacity
-#     booking = Booking(member, session, booking_date, capacity, id)
-#     return booking
+def select(id):
+    sql = "SELECT * FROM upcoming_sessions WHERE id = %s"
+    values = [id]
+    result = run_sql(sql, values)[0]
+    session_name = result['session_name']
+    session_date = result['session_date']
+    remaining_capacity = result['remaining_capacity']
+    member = member_repository.select(result['member_id'])
+    upcoming_session = UpcomingSession(session_name, session_date, remaining_capacity, member, id)
+    return upcoming_session
 
 # def delete_all():
 #     run_sql("DELETE FROM bookings")

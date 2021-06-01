@@ -29,5 +29,7 @@ CREATE TABLE bookings (
 CREATE TABLE upcoming_sessions (
     id SERIAL PRIMARY KEY,
     session_name VARCHAR (255),
-    session_date VARCHAR (255)
+    session_date VARCHAR (255),
+    remaining_capacity INT,
+    member_id INT REFERENCES members(id)
 );

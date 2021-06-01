@@ -19,25 +19,24 @@ def save(booking):
             
             if row['booking_date'] == booking.booking_date and row['member_id'] == booking.member.id:
                 booking_exists = True
-                print("Number 1")
                 break
             else:
                 booking_exists = False
-                print("Number 2")
+                
 
         if booking_exists == False:
             results = run_sql(sql, values)
             id = results[0]['id']
             booking.id = id
-            print("Number 3")
+            
         else:
-            print("Booking Exists")       
+            pass     
     
     else:
         results = run_sql(sql, values)
         id = results[0]['id']
         booking.id = id
-        print("Number 4")
+        
         
 
     
@@ -70,7 +69,7 @@ def delete_all():
     run_sql("DELETE FROM bookings")
 
 def update_capacity(booking):
-    sql = "UPDATE bookings SET (member_id, session_id, booking_date, capacity) = (%s, %s, %s, %s) WHERE id = %s"
+    sql = "UPDATE upcoming_sessions SET (member_id, session_id, booking_date, capacity) = (%s, %s, %s, %s) WHERE id = %s"
     booking.capacity -= 1
     values = [booking.member.id, booking.session.id, booking.booking_date, booking.capacity]
     run_sql(sql, values)
