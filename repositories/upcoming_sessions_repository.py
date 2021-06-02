@@ -16,6 +16,7 @@ def save(upcoming_session):
     if existing_upcoming_sessions != []:
         upcoming_session_exists = False
 
+        # When there are already upcoming sessions
         for row in existing_upcoming_sessions:
             
             if row['session_name'] == upcoming_session.session_name and row['session_date'] == upcoming_session.session_date:
@@ -30,6 +31,8 @@ def save(upcoming_session):
             upcoming_session.id = id
         else:
             pass
+
+    # When there are no upcoming sessions
     else:
         results = run_sql(sql, values)
         id = results[0]['id']
@@ -62,6 +65,13 @@ def get_id(session_name, session_date):
     for row in all_entries:
         if row['session_name'] == session_name and row['session_date'] == session_date:
             return row['id']
+
+def update_capacity(upcoming_session):
+    sql = "UPDATE upcoming_sessions SET remaining_capacity = %s WHERE id = %s"
+    upcoming_session.remaining_capacity -= 1
+    id = get_id(upcoming_session.session_name, upcoming_session.session_date)
+    values = [upcoming_session.remaining_capacity, id]
+    run_sql(sql, values)
 
     
 # def update_upcoming_session_name(session):

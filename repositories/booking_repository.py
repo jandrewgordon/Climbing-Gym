@@ -68,11 +68,11 @@ def select(id):
 def delete_all():
     run_sql("DELETE FROM bookings")
 
-def update_capacity(booking):
-    sql = "UPDATE upcoming_sessions SET (member_id, session_id, booking_date, capacity) = (%s, %s, %s, %s) WHERE id = %s"
-    booking.capacity -= 1
-    values = [booking.member.id, booking.session.id, booking.booking_date, booking.capacity]
-    run_sql(sql, values)
+# def update_capacity(booking):
+#     sql = "UPDATE upcoming_sessions SET (member_id, session_id, booking_date, capacity) = (%s, %s, %s, %s) WHERE id = %s"
+#     booking.capacity -= 1
+#     values = [booking.member.id, booking.session.id, booking.booking_date, booking.capacity]
+#     run_sql(sql, values)
 
 def booked_member_list():
     pass
