@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{session.name}}</h1>
-
+<h2>{{session.name}}</h2>
+{% if session.premium == True %}
+<p>Premium Session</p>
+{% else %}
+<p>Regular Session</p>
+{% endif %}
+<a href="/sessions/{{session.id}}/edit">Edit Session</a>
 {% endblock %}

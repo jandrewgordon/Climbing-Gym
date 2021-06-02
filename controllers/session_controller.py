@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request, Blueprint
 from models.session import Session
 import repositories.session_repository as session_repository
+import repositories.upcoming_sessions_repository as upcoming_sessions_repository
 
 sessions_blueprint = Blueprint("sessions", __name__)
 
@@ -34,5 +35,26 @@ def create_new_session():
     session_repository.save(new_session)
     return redirect("/sessions")
 
+# Edit
+@sessions_blueprint.route("/sessions/<id>/edit")
+def edit_session(id):
+    session = session_repository.select(id)
+    return render_template("sessions/edit.html", session=session)
 
+# Update
+@sessions_blueprint.route("/sessions/<id>", methods=["POST"])
+def update_session(id):
+    name = request.form["name"]
+    capacity = request.form["capacity"]
+    premium = request.form.get("premium")
+    if premium:
+        premium = True
+    else:
+        premium = False
+    print(name)
+    print(premium)
+    session = Session(name, capacity, premium, id)  
+    session_repository.update(session)
+    # upcoming_sessions_repository.update_upcoming_session_name(session)
+    return redirect("/sessions")
     
