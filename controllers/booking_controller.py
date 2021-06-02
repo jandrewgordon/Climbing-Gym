@@ -38,35 +38,35 @@ def create_new_booking():
     session = session_repository.select(session_id)
     capacity = session.capacity
     new_booking = Booking(member, session, booking_date, capacity)
+    
+    # Only admit member to Premium Sessions if they have Premium Membership
     if session.premium == True:
         if member.premium == True:
             booking_repository.save(new_booking)
 
-            # Creating upcoming_session
-            upcoming_session = UpcomingSession(session.name, booking_date, session.capacity, member)
-            upcoming_session_repository.save(upcoming_session)
-
-            # Creating upcoming_sessions_members entry
-            upcoming_session_id = upcoming_session_repository.get_id(session.name, booking_date)
-            new_upcoming_session = upcoming_session_repository.select(upcoming_session_id)
-            upcoming_session_member = UpcomingSessionMember(new_upcoming_session, member)
-            upcoming_sessions_member_repository.save(upcoming_session_member)
+            update_upcoming_session(session.name, booking_date, session.capacity, member)
 
         else:
             print("Needs Premium")
     else:
         booking_repository.save(new_booking)
 
-        # Creating upcoming_session
-        upcoming_session = UpcomingSession(session.name, booking_date, session.capacity, member)
-        upcoming_session_repository.save(upcoming_session)
-
-        # Creating upcoming_sessions_members entry
-        upcoming_session_id = upcoming_session_repository.get_id(session.name, booking_date)
-        new_upcoming_session = upcoming_session_repository.select(upcoming_session_id)
-        upcoming_session_member = UpcomingSessionMember(new_upcoming_session, member)
-        upcoming_sessions_member_repository.save(upcoming_session_member)
+        update_upcoming_session(session.name, booking_date, session.capacity, member)
+    
+    return redirect("/bookings")
         
+
+def update_upcoming_session(session_name, booking_date, session_capacity, member):
+    upcoming_session = UpcomingSession(session_name, booking_date, session_capacity, member)
+    upcoming_session_repository.save(upcoming_session)
+
+    # Creating upcoming_sessions_members entry
+    upcoming_session_id = upcoming_session_repository.get_id(session_name, booking_date)
+    new_upcoming_session = upcoming_session_repository.select(upcoming_session_id)
+    upcoming_session_member = UpcomingSessionMember(new_upcoming_session, member)
+    upcoming_sessions_member_repository.save(upcoming_session_member)
+
+
 
     # # Creating upcoming_session
     # upcoming_session = UpcomingSession(session.name, booking_date, session.capacity, member)
@@ -80,7 +80,7 @@ def create_new_booking():
 
     
 
-    return redirect("/bookings")
+    # return redirect("/bookings")
 
 #EDIT
 #UPDATE
