@@ -1,4 +1,5 @@
 from datetime import date
+from models.upcoming_session_member import UpcomingSessionMember
 from models.upcoming_session import UpcomingSession
 from flask import Flask, render_template, redirect, request, Blueprint
 from models.booking import Booking
@@ -7,6 +8,7 @@ import repositories.member_repository as member_repository
 import repositories.session_repository as session_repository
 import repositories.booking_repository as booking_repository
 import repositories.upcoming_sessions_repository as upcoming_session_repository
+import repositories.upcoming_sessions_members_repository as upcoming_sessions_member_repository
 
 bookings_blueprint = Blueprint("bookings", __name__)
 
@@ -40,7 +42,18 @@ def create_new_booking():
 
     # # Creating upcoming_session
     upcoming_session = UpcomingSession(session.name, booking_date, session.capacity, member)
+    print("I'm here")
     upcoming_session_repository.save(upcoming_session)
+
+    # Creating upcoming_sessions_members entry
+    print(session.name)
+    print(booking_date)
+    upcoming_session_id = upcoming_session_repository.get_id(session.name, booking_date)
+    new_upcoming_session = upcoming_session_repository.select(upcoming_session_id)
+    upcoming_session_member = UpcomingSessionMember(new_upcoming_session, member)
+    upcoming_sessions_member_repository.save(upcoming_session_member)
+
+    
 
     return redirect("/bookings")
 

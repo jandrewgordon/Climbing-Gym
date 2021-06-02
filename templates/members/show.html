@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{member.first_name}} {{member.last_name}}</h1>
-
+<h2>{{member.first_name}} {{member.last_name}}</h2>
+{% if member.premium == True %}
+<p>Premium Membership</p>
+{% else %}
+<p>Regular Membership</p>
+{% endif %}
+<a href="/members/{{member.id}}/edit">Edit Member</a>
 {% endblock %}

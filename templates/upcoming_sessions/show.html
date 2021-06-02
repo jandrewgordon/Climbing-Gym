@@ -4,8 +4,8 @@
 <h1>{{upcoming_session.session_name}} - {{upcoming_session.session_date}}</h1>
 <p>Spaces: {{upcoming_session.remaining_capacity}}</p>
 <h2>Members in Session:</h2>
-<!-- <ul>
-{% for member in booked_members %}
+<ul>
+{% for member in all_booked_members %}
     <li><a href="/members/{{member.id}}">{{member.last_name}}, {{member.first_name}}</a></li>
 {% endfor %}
 </ul>
@@ -14,7 +14,7 @@
     {% for member in all_members %}    
         <option value="{{member.id}}">{{member.last_name}}, {{member.first_name}}</option>
     {% endfor %}
-    </select> -->
+    </select>
 
 
 {% endblock %}

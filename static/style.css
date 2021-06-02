@@ -1,30 +1,63 @@
-header {
-    background-color: dodgerblue;
-    grid-area: header;
-    display: flex;
+body,html {
+    height: 100%;
+    margin: 0;
 }
 
-header > nav {
-    flex: 50%;
+header {
+    background-color: #ffd000;
+    display: inline-flex;
+    width: 100%;
+}
+
+body > header > nav { 
+    text-align: center;
+    margin: 0;
+    padding: 0; 
+    display: inline-flex;   
+}
+
+header > nav >  ul {    
+    font-size: 3vw;
+    list-style: none;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    margin-top:2.8vw;
+    padding-left: 8vw;
+}
+
+header > nav >  ul > li {    
+    display: inline;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+}
+
+a:hover{
+    color: dodgerblue;
 }
 
 header > #title {
-    padding-left: 20px;
-    flex: 50%;
+    padding-left: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 6vw;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 10px;
 }
-    
 
-header > nav >  ul {
-    padding-right: 20px;
-    padding-top: 20px;
-    list-style: none;
-    display: flex;
-    flex-flow: row;
-    justify-content: space-evenly;
+header > #title :hover {
+    color: white;
 }
 
 body {
-    margin: 0;
+    margin: 0px ;
+    background-image: url("images/background.jpg");
+    background-size: cover;
 }
 
 main {
@@ -33,20 +66,56 @@ main {
 
 #welcome {
     text-align: center;
+    font-family: 'Inter', sans-serif;
+    color: white;
+    font-size: 6vw;
 }
 
 .input {
     
 }
-
-
-.buttons {
-    display: flex;
-    flex-flow: row;
-    justify-content: space-evenly; 
+#bigbuttons {
+    text-align: left;
+    padding: 0px;
+    font-size: 4vw;
 }
+
+#bigbuttons > div {
+    margin-left: 6vw;
+}
+
+#smallbuttons > div {
+    margin-left: 6vw;
+}
+
+#smallbuttons {
+    margin-top: 3vw;
+    font-size: 3vw;
+}
+
+/* #bigbuttons > li {
+    text-decoration: none;
+    padding-left: 1vw;
+    padding-right: 1vw;
+} */
+
+/* #bigbuttons > div{
+    padding-left: 3vw;
+    padding-right: 3vw;
+} */
+
 
 main {
-    padding: 0px 20px;
+    font-family: 'Inter', sans-serif;
+    color: white;
+    margin-left: 4vw;
+    font-size: 3vw;
 }
+
+main > h2 {
+    font-size: 4vw;
+    color: white;
+}
+
+
 

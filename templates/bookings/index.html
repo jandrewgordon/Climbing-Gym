@@ -12,7 +12,7 @@
 {{response}}
 <ul>
 {% for booking in all_bookings %}
-    <li><a href="/bookings/{{booking.id}}">{{booking.booking_date}} - {{booking.session.name}} - {{booking.member.last_name}}, {{booking.member.first_name}} </a></li>
+    <li>{{booking.booking_date}} - {{booking.session.name}} - {{booking.member.last_name}}, {{booking.member.first_name}}</li>
 {% endfor %}
 </ul>
 <p><a href="/bookings/new">Make new booking</a></p>

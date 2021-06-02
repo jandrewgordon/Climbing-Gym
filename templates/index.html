@@ -2,18 +2,21 @@
 
 {% block content %}
 <h1 id="welcome">Welcome!</h1>
-<section id="main-nav">
-<div class = "buttons">
-<a href="/members/new"><h2>New Member</h2></a>
-<a href="/sessions/new"><h2>New Session</h2></a>
-<a href="/bookings/new"><h2>New Booking</h2></a>
-</div>
-<br>
-<div class = "buttons">
-<a href="/members"><h3>View all Members</h2></a>
-<a href="/sessions"><h3>View all Sessions</h2></a>
-<a href="/bookings"><h3>View all Bookings</h2></a>
-</div>
+<section id = "bigbuttons" style="display: flex;">
+    <div style="width: 10%"></div>
+    <div style="width: 26%"><a href="/members/new">New<br>Member</a></div>
+    <div style="width: 26%"><a href="/sessions/new">New<br>Session</a></div>
+    <div style="width: 26%"><a href="/bookings/new">New<br>Booking</a></div>
+    <div style="width: 10%"></div>
 </section>
+<br>
+<section id = "smallbuttons" style="display: flex;">
+    <div style="width: 10%"></div>
+    <div style="width: 26%"><a href="/members">View all Members</a></div>
+    <div style="width: 26%"><a href="/sessions">View all Sessions</a></div>
+    <div style="width: 26%"><a href="/bookings">View all Bookings</a></div>
+    <div style="width: 10%"></div>
+</section>
+
 
 {% endblock %}

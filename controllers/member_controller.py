@@ -35,5 +35,24 @@ def create_new_member():
     member_repository.save(new_member)
     return redirect("/members")
 
+# Edit
+@members_blueprint.route("/members/<id>/edit")
+def edit_member(id):
+    member = member_repository.select(id)
+    return render_template("members/edit.html", member=member)
 
-    
+# Update
+@members_blueprint.route("/members/<id>", methods=["POST"])
+def update_member(id):
+    last_name = request.form["last_name"]
+    first_name = request.form["first_name"]
+    premium = request.form.get("premium")
+    if premium:
+        premium = True
+    else:
+        premium = False
+    print(last_name)
+    print(premium)
+    member = Member(last_name, first_name, premium, 0, id)  
+    member_repository.update(member)
+    return redirect("/members")

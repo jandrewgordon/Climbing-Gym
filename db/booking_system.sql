@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS upcoming_sessions_members 
+DROP TABLE IF EXISTS upcoming_sessions
 DROP TABLE IF EXISTS sessions;
 DROP TABLE IF EXISTS bookings;
 DROP TABLE IF EXISTS members;
@@ -31,5 +33,11 @@ CREATE TABLE upcoming_sessions (
     session_name VARCHAR (255),
     session_date VARCHAR (255),
     remaining_capacity INT,
+    member_id INT REFERENCES members
+);
+
+CREATE TABLE upcoming_sessions_members (
+    id SERIAL PRIMARY KEY,
+    upcoming_session_id INT REFERENCES upcoming_sessions(id),
     member_id INT REFERENCES members(id)
 );

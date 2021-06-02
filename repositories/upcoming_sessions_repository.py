@@ -56,6 +56,19 @@ def select(id):
     member = member_repository.select(result['member_id'])
     upcoming_session = UpcomingSession(session_name, session_date, remaining_capacity, member, id)
     return upcoming_session
+    
+# def get_length():
+#     database_as_list = select_all()
+#     database_length = len(database_as_list)
+#     return database_length
+
+def get_id(session_name, session_date):
+    all_entries = run_sql("SELECT * FROM upcoming_sessions")
+    for row in all_entries:
+        if row['session_name'] == session_name and row['session_date'] == session_date:
+            return row['id']
+
+
 
 # def delete_all():
 #     run_sql("DELETE FROM bookings")
